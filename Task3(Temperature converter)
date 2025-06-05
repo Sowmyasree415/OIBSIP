@@ -1,0 +1,74 @@
+<html>
+<head>
+<style>
+ body {
+       font-family: Arial, sans-serif;
+       padding: 20px;
+       background-color:#2F3C7E;
+      }
+.converter {
+            background:#FBEAEB;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+           }
+label, select, input, button {
+                               display: block;
+                               width: 100%;
+                               margin-bottom: 15px;
+                              }
+#result {
+          font-size: 1.2em;
+           color: #333;
+           font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="converter">
+<h2><i><u>Temperature Converter</i></u></h2>
+<label for="temperature"><b>Enter Temperature:</b></label>
+<input type="number" id="temperature" placeholder="Enter number">
+
+<label for="unit"><b>Convert from:</b></label>
+<select id="unit">
+<option value="celsius">Celsius</option>
+<option value="fahrenheit">Fahrenheit</option>
+<option value="kelvin">Kelvin</option> 
+</select>
+
+<button onclick="convertTemp()">Convert</button>
+
+<p id="result"></p>
+</div>
+
+<script>
+function convertTemp() {
+const temp = parseFloat(document.getElementById('temperature').value);
+const unit = document.getElementById('unit').value;
+let resultText = '';
+
+if (isNaN(temp)) {
+ resultText = 'Please enter a valid number.';
+ } else {
+  switch (unit) {
+                 case 'celsius':
+                 resultText = `${temp}°C = ${(temp * 9/5 + 32).toFixed(2)}°F, ${(temp + 273.15).toFixed(2)}K`;
+break;
+                  case 'fahrenheit':
+                  resultText = `${temp}°F = ${((temp - 32) * 5/9).toFixed(2)}°C, ${(((temp - 32) * 5/9) + 273.15).toFixed(2)}K`;
+break;
+                  case 'kelvin':
+                   resultText = `${temp}K = ${(temp - 273.15).toFixed(2)}°C, ${((temp - 273.15) * 9/5 + 32).toFixed(2)}°F`;
+break;
+default:
+resultText = 'Invalid unit selected.';
+}
+ }
+document.getElementById('result').innerText = resultText;
+}
+</script>
+</body>
+</html>
